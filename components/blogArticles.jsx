@@ -1,6 +1,6 @@
 
 
-export default function BlogArticles({posts,blogHeading}) {
+export default function BlogArticles({posts,blogHeading,blogHeadingExcerpt}) {
   return (
     <div className="relative bg-gray-800 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
       <div className="absolute inset-0">
@@ -12,7 +12,7 @@ export default function BlogArticles({posts,blogHeading}) {
             {blogHeading}
           </h2>
           <p className="mt-3 max-w-2xl mx-auto text-xl text-white-500 sm:mt-4">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus labore praesentium fugit voluptatibus.
+            {blogHeadingExcerpt}
           </p>
         </div>
         <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">

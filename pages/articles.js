@@ -116,9 +116,9 @@ export default function Articles() {
       ])
   return (
     <>
-        <Header />
-        <BlogArticles posts={allArticles} blogHeading='All articles'/>
-        <Footer />
+        
+        <BlogArticles posts={allArticles} blogHeading='All articles' blogHeadingExcerpt="A collection of all my works including satire's, stories, poetry and more! "/>
+        
     </>
   )
 }
