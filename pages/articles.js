@@ -3,7 +3,7 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 import BlogArticles from '../components/blogArticles'
 
-export default function Articles() {
+export default function Articles({articles}) {
     const [allArticles,setAllArticles] = useState([
         {
           title: 'Boost your conversion rate',
@@ -122,3 +122,15 @@ export default function Articles() {
     </>
   )
 }
+
+export const getStaticProps = async () => {
+  const res = await fetch(`${server}/api/article`)
+  const articles = await res.json()
+
+  return {
+    props: {
+      articles,
+    },
+  }
+}
+
