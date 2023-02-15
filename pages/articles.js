@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import { server } from '../config'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import BlogArticles from '../components/blogArticles'

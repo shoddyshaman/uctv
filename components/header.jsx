@@ -1,18 +1,73 @@
-import { Fragment, useEffect,useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/solid";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
-
+import { useSession, signIn, signOut } from "next-auth/react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Header() {
-  const [location,setLocation] = useState(null)
+  const [location, setLocation] = useState(null);
+  const { data: session } = useSession();
+
   useEffect(() => {
-     setLocation(window.location.pathname) 
-  },[])
+    setLocation(window.location.pathname);
+  }, []);
+
+  const renderLoginButton = (active) => {
+    
+    if (session) {
+      return (
+        <Disclosure.Button
+          as="a"
+          onClick={() => signOut()}
+          className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+        >
+          Sign out
+        </Disclosure.Button>
+      );
+    } else {
+      return (
+        <Disclosure.Button
+          as="a"
+          onClick={() => signIn()}
+          className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+        >
+          Sign in
+        </Disclosure.Button>
+      );
+    }
+  };
+
+  const renderLoginLink = (active) => {
+    if (session && active) {
+      return (
+        <a
+          href="#"
+          className={classNames(
+            active ? "bg-gray-100" : "",
+            "block px-4 py-2 text-sm text-gray-700"
+          )}
+        >
+          Sign out
+        </a>
+      );
+    } else {
+      return (
+        <a
+          href="#"
+          className={classNames(
+            active ? "bg-gray-100" : "",
+            "block px-4 py-2 text-sm text-gray-700"
+          )}
+        >
+          Sign in
+        </a>
+      );
+    }
+  };
 
   const borderActive = {
     default:
@@ -42,25 +97,41 @@ export default function Header() {
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   <a
                     href="/"
-                    className={`inline-flex items-center border-b-2 ${location === '/' ? borderActive.current : borderActive.default} px-1 pt-1 text-sm font-medium text-gray-900`}
+                    className={`inline-flex items-center border-b-2 ${
+                      location === "/"
+                        ? borderActive.current
+                        : borderActive.default
+                    } px-1 pt-1 text-sm font-medium text-gray-900`}
                   >
                     Home
                   </a>
                   <a
                     href="/articles"
-                    className={`inline-flex items-center border-b-2  px-1 pt-1 text-sm font-medium ${location === '/articles' ? borderActive.current : borderActive.default}`}
+                    className={`inline-flex items-center border-b-2  px-1 pt-1 text-sm font-medium ${
+                      location === "/articles"
+                        ? borderActive.current
+                        : borderActive.default
+                    }`}
                   >
                     Articles
                   </a>
                   <a
                     href="/goa"
-                    className={`inline-flex items-center border-b-2  px-1 pt-1 text-sm font-medium ${location === '/goa' ? borderActive.current : borderActive.default}`}
+                    className={`inline-flex items-center border-b-2  px-1 pt-1 text-sm font-medium ${
+                      location === "/goa"
+                        ? borderActive.current
+                        : borderActive.default
+                    }`}
                   >
                     God's Own Art
                   </a>
                   <a
                     href="/contact"
-                    className={`inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium ${location === '/contact' ? borderActive.current : borderActive.default}`}
+                    className={`inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium ${
+                      location === "/contact"
+                        ? borderActive.current
+                        : borderActive.default
+                    }`}
                   >
                     Contact
                   </a>
@@ -99,7 +170,7 @@ export default function Header() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="hidden lg:ml-4 lg:flex lg:items-center">
+              <div className=" lg:ml-4 lg:flex lg:items-center">
                 <button
                   type="button"
                   className="flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -109,7 +180,7 @@ export default function Header() {
                 </button>
 
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-4 flex-shrink-0">
+                <Menu as="div" className="relative z-10 ml-4 flex-shrink-0">
                   <div>
                     <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                       <span className="sr-only">Open user menu</span>
@@ -157,17 +228,7 @@ export default function Header() {
                         )}
                       </Menu.Item>
                       <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Sign out
-                          </a>
-                        )}
+                        {({ active }) => renderLoginLink(active)}
                       </Menu.Item>
                     </Menu.Items>
                   </Transition>
@@ -248,13 +309,7 @@ export default function Header() {
                 >
                   Settings
                 </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-                >
-                  Sign out
-                </Disclosure.Button>
+                {renderLoginButton()}
               </div>
             </div>
           </Disclosure.Panel>
