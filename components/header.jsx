@@ -11,7 +11,7 @@ function classNames(...classes) {
 export default function Header() {
   const [location, setLocation] = useState(null);
   const { data: session } = useSession();
-
+console.log(session)
   useEffect(() => {
     setLocation(window.location.pathname);
   }, []);
@@ -57,7 +57,7 @@ export default function Header() {
     } else {
       return (
         <a
-          href="#"
+          onClick={() => signIn()}
           className={classNames(
             active ? "bg-gray-100" : "",
             "block px-4 py-2 text-sm text-gray-700"
