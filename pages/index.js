@@ -69,7 +69,7 @@ export default function Home() {
     <div>
       <Author />
       <Publications />
-      <BlogArticles posts={featuredPosts} blogHeading="Featured Articles" blogHeadingExcerpt=""/>
+      <BlogArticles posts={featuredPosts} blogHeading="Featured Content" blogHeadingExcerpt=""/>
       <BookPlug />
       <Testimonials />
       <SignupNewsletter />

@@ -11,18 +11,17 @@ function classNames(...classes) {
 export default function Header() {
   const [location, setLocation] = useState(null);
   const { data: session } = useSession();
-console.log(session)
+  console.log(session);
   useEffect(() => {
     setLocation(window.location.pathname);
   }, []);
 
   const renderLoginButton = (active) => {
-    
     if (session) {
       return (
         <Disclosure.Button
           as="a"
-          onClick={() => signOut()}
+          onClick={() => signOut({callbackUrl : "http://localhost:3000/login"})}
           className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
         >
           Sign out
@@ -32,7 +31,7 @@ console.log(session)
       return (
         <Disclosure.Button
           as="a"
-          onClick={() => signIn()}
+          href="/login"
           className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
         >
           Sign in
@@ -42,10 +41,10 @@ console.log(session)
   };
 
   const renderLoginLink = (active) => {
-    if (session && active) {
+    if (session) {
       return (
         <a
-          href="#"
+          onClick={() => signOut({callbackUrl : "http://localhost:3000/login"})}
           className={classNames(
             active ? "bg-gray-100" : "",
             "block px-4 py-2 text-sm text-gray-700"
@@ -57,7 +56,7 @@ console.log(session)
     } else {
       return (
         <a
-          onClick={() => signIn()}
+          href="/login"
           className={classNames(
             active ? "bg-gray-100" : "",
             "block px-4 py-2 text-sm text-gray-700"
@@ -176,7 +175,7 @@ console.log(session)
                   className="flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  <BellIcon className="hidden lg:block h-6 w-6" aria-hidden="true" />
                 </button>
 
                 {/* Profile dropdown */}
@@ -184,11 +183,15 @@ console.log(session)
                   <div>
                     <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                       <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      {session ? <img
+                        className="hidden lg:block h-8 w-8 rounded-full"
+                        src={session.user.image}
                         alt=""
-                      />
+                      /> : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="hidden lg:block h-6 w-6 rounded-full">
+                      <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
+                    </svg>
+                    }
+                      
                     </Menu.Button>
                   </div>
                   <Transition
@@ -201,32 +204,36 @@ console.log(session)
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                      {session && (
+                        <>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href="#"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Your Profile
+                              </a>
                             )}
-                          >
-                            Your Profile
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href="#"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Settings
+                              </a>
                             )}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
+                          </Menu.Item>
+                        </>
+                      )}
                       <Menu.Item>
                         {({ active }) => renderLoginLink(active)}
                       </Menu.Item>
@@ -269,49 +276,52 @@ console.log(session)
                 Contact
               </Disclosure.Button>
             </div>
-            <div className="border-t border-gray-200 pt-4 pb-3">
-              <div className="flex items-center px-4">
-                <div className="flex-shrink-0">
-                  <img
-                    className="h-10 w-10 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                </div>
-                <div className="ml-3">
-                  <div className="text-base font-medium text-gray-800">
-                    Tom Cook
+            {session && (
+              <div className="border-t border-gray-200 pt-4 pb-3">
+                <div className="flex items-center px-4">
+                  <div className="flex-shrink-0">
+                    <img
+                      className="h-10 w-10 rounded-full"
+                      src={session.user.image}
+                      alt="your profile image"
+                    />
                   </div>
-                  <div className="text-sm font-medium text-gray-500">
-                    tom@example.com
+                  <div className="ml-3">
+                    <div className="text-base font-medium text-gray-800">
+                      {session.user.name}
+                    </div>
+                    <div className="text-sm font-medium text-gray-500">
+                      {session.user.email}
+                    </div>
                   </div>
+
+                  <button
+                    type="button"
+                    className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  >
+                    <span className="sr-only">View notifications</span>
+                    <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                <div className="mt-3 space-y-1">
+                  <Disclosure.Button
+                    as="a"
+                    href="#"
+                    className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+                  >
+                    Your Profile
+                  </Disclosure.Button>
+                  <Disclosure.Button
+                    as="a"
+                    href="#"
+                    className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+                  >
+                    Settings
+                  </Disclosure.Button>
+                  {renderLoginButton()}
+                </div>
               </div>
-              <div className="mt-3 space-y-1">
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-                >
-                  Your Profile
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-                >
-                  Settings
-                </Disclosure.Button>
-                {renderLoginButton()}
-              </div>
-            </div>
+            )}
           </Disclosure.Panel>
         </>
       )}

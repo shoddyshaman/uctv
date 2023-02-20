@@ -8,10 +8,10 @@ export default function BlogArticles({posts,blogHeading,blogHeadingExcerpt}) {
       </div>
       <div className="relative max-w-7xl mx-auto">
         <div className="text-center">
-          <h2 className="text-3xl tracking-tight font-bold text-white-900 sm:text-4xl sm:tracking-tight">
+          <h2 className="text-3xl tracking-tight font-bold text-white sm:text-4xl sm:tracking-tight">
             {blogHeading}
           </h2>
-          <p className="mt-3 max-w-2xl mx-auto text-xl text-white-500 sm:mt-4">
+          <p className="mt-3 max-w-2xl mx-auto text-xl text-white sm:mt-4">
             {blogHeadingExcerpt}
           </p>
         </div>
