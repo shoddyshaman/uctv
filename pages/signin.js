@@ -1,15 +1,16 @@
-import React from "react";
+import React,{useState} from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-const login = () => {
+const signin = () => {
   const { data: session, status } = useSession();
+  const [email, setEmail] = useState("");
   if (session) {
     return (
       <>
         <h1>Logged in as {session.user.email}</h1>
         <button
           onClick={() =>
-            signOut({ callbackUrl: "http://localhost:3000/login" })
+            signOut({ callbackUrl: "http://localhost:3000/signin" })
           }
         >
           Sign out
@@ -26,7 +27,7 @@ const login = () => {
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray">
             Sign in to your account
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
@@ -52,12 +53,13 @@ const login = () => {
                 </label>
                 <div className="mt-1">
                   <input
+                    onChange={(e) => setEmail(e.target.value)}
                     id="email"
                     name="email"
                     type="email"
                     autoComplete="email"
                     required
-                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    className="block text-black w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
               </div>
@@ -65,8 +67,15 @@ const login = () => {
               <div>
                 <button
                   type="submit"
-                  onClick={() => signIn("email")}
-                  className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  onClick={async(e) => {
+                    e.preventDefault();
+                    await signIn("email",{
+                      redirect: false,
+                      callbackUrl: window.location.href,
+                      email,
+                    })}
+                  }
+                    className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Sign in using email
                 </button>
@@ -148,4 +157,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default signin;

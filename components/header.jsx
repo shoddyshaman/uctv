@@ -21,7 +21,9 @@ export default function Header() {
       return (
         <Disclosure.Button
           as="a"
-          onClick={() => signOut({callbackUrl : "http://localhost:3000/login"})}
+          onClick={() =>
+            signOut({ callbackUrl: "http://localhost:3000/api/auth/signin" })
+          }
           className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
         >
           Sign out
@@ -31,7 +33,7 @@ export default function Header() {
       return (
         <Disclosure.Button
           as="a"
-          href="/login"
+          href="/api/auth/signin"
           className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
         >
           Sign in
@@ -44,7 +46,9 @@ export default function Header() {
     if (session) {
       return (
         <a
-          onClick={() => signOut({callbackUrl : "http://localhost:3000/login"})}
+          onClick={() =>
+            signOut({ callbackUrl: "http://localhost:3000/api/auth/signin" })
+          }
           className={classNames(
             active ? "bg-gray-100" : "",
             "block px-4 py-2 text-sm text-gray-700"
@@ -56,7 +60,7 @@ export default function Header() {
     } else {
       return (
         <a
-          href="/login"
+          href="/api/auth/signin"
           className={classNames(
             active ? "bg-gray-100" : "",
             "block px-4 py-2 text-sm text-gray-700"
@@ -175,7 +179,10 @@ export default function Header() {
                   className="flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   <span className="sr-only">View notifications</span>
-                  <BellIcon className="hidden lg:block h-6 w-6" aria-hidden="true" />
+                  <BellIcon
+                    className="hidden h-6 w-6 lg:block"
+                    aria-hidden="true"
+                  />
                 </button>
 
                 {/* Profile dropdown */}
@@ -183,15 +190,26 @@ export default function Header() {
                   <div>
                     <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                       <span className="sr-only">Open user menu</span>
-                      {session ? <img
-                        className="hidden lg:block h-8 w-8 rounded-full"
-                        src={session.user.image}
-                        alt=""
-                      /> : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="hidden lg:block h-6 w-6 rounded-full">
-                      <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
-                    </svg>
-                    }
-                      
+                      {session ? (
+                        <img
+                          className="hidden h-8 w-8 rounded-full lg:block"
+                          src={session.user.image}
+                          alt=""
+                        />
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="hidden h-7 w-7 rounded-full lg:block text-gray-500"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      )}
                     </Menu.Button>
                   </div>
                   <Transition
@@ -318,10 +336,10 @@ export default function Header() {
                   >
                     Settings
                   </Disclosure.Button>
-                  {renderLoginButton()}
                 </div>
               </div>
             )}
+            {renderLoginButton()}
           </Disclosure.Panel>
         </>
       )}
