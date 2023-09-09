@@ -24,30 +24,30 @@ export default function BlogArticles({posts,blogHeading,blogHeadingExcerpt}) {
               <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                 <div className="flex-1">
                   <p className="text-sm font-medium text-indigo-600">
-                    <a href={post.category.href} className="hover:underline">
-                      {post.category.name}
+                    <a href={''} className="hover:underline">
+                      {post.category}
                     </a>
                   </p>
-                  <a href={post.href} className="block mt-2">
+                  <a href={''} className="block mt-2">
                     <p className="text-xl font-semibold text-gray-900">{post.title}</p>
-                    <p className="mt-3 text-base text-gray-500">{post.description}</p>
+                    <p className="mt-3 text-base text-gray-500">{post.content}</p>
                   </a>
                 </div>
                 <div className="mt-6 flex items-center">
                   <div className="flex-shrink-0">
-                    <a href={post.author.href}>
-                      <span className="sr-only">{post.author.name}</span>
-                      <img className="h-10 w-10 rounded-full" src={post.author.imageUrl} alt="" />
+                    <a href={''}>
+                      <span className="sr-only">{post.author_id}</span>
+                      <img className="h-10 w-10 rounded-full" src={post.imageUrl} alt="" />
                     </a>
                   </div>
                   <div className="ml-3">
                     <p className="text-sm font-medium text-gray-900">
-                      <a href={post.author.href} className="hover:underline">
-                        {post.author.name}
+                      <a href={''} className="hover:underline">
+                        {post.author_id}
                       </a>
                     </p>
                     <div className="flex space-x-1 text-sm text-gray-500">
-                      <time dateTime={post.datetime}>{post.date}</time>
+                      {/* <time dateTime={post.datetime}>{post.date}</time> */}
                       <span aria-hidden="true">&middot;</span>
                       <span>{post.readingTime} read</span>
                     </div>
