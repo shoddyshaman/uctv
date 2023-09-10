@@ -1,7 +1,8 @@
-import client from "../../../lib/prismadb";
+import client from "../../../lib/prismadb.ts";
 
 export default async function handler(req, res) {
-  const prisma = new PrismaClient();
-  const articles = await prisma.$queryRaw`SELECT * FROM test_data`;
-  res.status(200).send(articles);
+  // const prisma = client();
+  const posts = await client.$queryRaw`SELECT * FROM test_data`;
+  console.log(posts);  
+  res.status(200).json(posts);
 }
