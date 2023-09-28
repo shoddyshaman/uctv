@@ -30,14 +30,20 @@ export function Author() {
               Hey there, I’m the author behind ‘Theatre in Nainital’.
             </p>
             <p className="mt-4 text-lg tracking-tight text-slate-700">
-              I’ve been working in the field of Journalism,Hospitality and Theater for a long time now and this is where I share it all with you!
+              I’ve been working in the field of Journalism, Theater and Tourism for a long time now and this is where I share it all with you!
             </p>
             <div className="mt-6">
                     <a
-                      href="#"
+                      href="https://www.abebooks.com/first-edition/Theater-Nainital-Memoires-Rangkarma-1910-2010-Umesh/30308386883/bd"
                       className="inline-block rounded-md border border-transparent bg-indigo-600 py-3 px-8 font-medium text-white hover:bg-indigo-700"
                     >
                       Shop Book
+                    </a>
+                    <a
+                      href="https://www.youtube.com/@koon-nikoon"
+                      className="ml-4 inline-block rounded-md border border-transparent bg-red-600 py-3 px-8 font-medium text-white hover:bg-red-700"
+                    >
+                      Youtube Channel
                     </a>
                   </div>
             {/* <p className="mt-8">

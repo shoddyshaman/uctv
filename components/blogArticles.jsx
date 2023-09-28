@@ -1,6 +1,6 @@
+import Link from 'next/link'
 
-
-export default function BlogArticles({posts,blogHeading,blogHeadingExcerpt}) {
+export default function BlogArticles({articles,blogHeading,blogHeadingExcerpt}) {
   return (
     <div className="relative bg-gray-800 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
       <div className="absolute inset-0">
@@ -16,10 +16,11 @@ export default function BlogArticles({posts,blogHeading,blogHeadingExcerpt}) {
           </p>
         </div>
         <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-          {posts.map((post) => (
+          {articles.map((post) => (
+            <Link href={`/article/${post.post_id}`}>
             <div key={post.title} className="flex flex-col rounded-lg shadow-lg overflow-hidden">
               <div className="flex-shrink-0">
-                <img className="h-48 w-full object-cover" src={post.imageURL} alt="" />
+                <img className="h-48 w-full object-cover" src={post.imageUrl} alt="" />
               </div>
               <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                 <div className="flex-1">
@@ -30,7 +31,7 @@ export default function BlogArticles({posts,blogHeading,blogHeadingExcerpt}) {
                   </p>
                   <a href={''} className="block mt-2">
                     <p className="text-xl font-semibold text-gray-900">{post.title}</p>
-                    <p className="mt-3 text-base text-gray-500">{post.content}</p>
+                    <p className="mt-3 text-base text-gray-500">{post.content.substring(0,96)}...</p>
                   </a>
                 </div>
                 <div className="mt-6 flex items-center">
@@ -41,20 +42,21 @@ export default function BlogArticles({posts,blogHeading,blogHeadingExcerpt}) {
                     </a>
                   </div>
                   <div className="ml-3">
-                    <p className="text-sm font-medium text-gray-900">
+                    {/* <p className="text-sm font-medium text-gray-900">
                       <a href={''} className="hover:underline">
                         {post.author_id}
                       </a>
-                    </p>
+                    </p> */}
                     <div className="flex space-x-1 text-sm text-gray-500">
                       {/* <time dateTime={post.datetime}>{post.date}</time> */}
                       <span aria-hidden="true">&middot;</span>
-                      <span>{post.readingTime} read</span>
+                      <span>{post.reading_time} read</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            </Link>
           ))}
         </div>
       </div>

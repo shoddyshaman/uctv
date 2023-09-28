@@ -16,8 +16,10 @@ export default function Contact() {
                 Get in touch
               </h2>
               <p className="mt-3 text-lg leading-6 text-gray-500">
-                Nullam risus blandit ac aliquam justo ipsum. Quam mauris
-                volutpat massa dictumst amet. Sapien tortor lacus arcu.
+              Hello there!
+              <br />
+We're thrilled that you'd like to get in touch with us. Your feedback, questions, and comments are important to us, and we can't wait to hear from you.
+
               </p>
               <dl className="mt-8 text-base text-gray-500">
                 {/* <div>
@@ -27,7 +29,7 @@ export default function Contact() {
                   <p>Springfield, OR 12345</p>
                 </dd>
               </div> */}
-                <div className="mt-6">
+                {/* <div className="mt-6">
                   <dt className="sr-only">Phone number</dt>
                   <dd className="flex">
                     <PhoneIcon
@@ -36,7 +38,7 @@ export default function Contact() {
                     />
                     <span className="ml-3">+1 (555) 123-4567</span>
                   </dd>
-                </div>
+                </div> */}
                 <div className="mt-3">
                   <dt className="sr-only">Email</dt>
                   <dd className="flex">

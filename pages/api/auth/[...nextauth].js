@@ -29,8 +29,8 @@ const sendVerificationRequest = ({ identifier, url}) => {
     encoding: 'utf8',
   });
   const emailTemplate = Handlebars.compile(emailFile);
-  console.log("emailTemplate", emailTemplate)
-  console.log("identifier", identifier)
+  // console.log("emailTemplate", emailTemplate)
+  // console.log("identifier", identifier)
   transporter.sendMail({
     to: identifier,
     from: `"✨ UmeshVishwas" ${process.env.EMAIL_FROM}`,

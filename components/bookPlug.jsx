@@ -32,7 +32,7 @@ export default function BookPlug() {
                   </p>
                   <div className="mt-6">
                     <a
-                      href="#"
+                      href="https://www.abebooks.com/first-edition/Theater-Nainital-Memoires-Rangkarma-1910-2010-Umesh/30308386883/bd"
                       className="inline-block rounded-md border border-transparent bg-indigo-600 py-3 px-8 font-medium text-white hover:bg-indigo-700"
                     >
                       Shop Book
@@ -44,8 +44,8 @@ export default function BookPlug() {
           </div>
           <div className="h-48 w-full sm:h-64 lg:absolute lg:top-0 lg:right-0 lg:h-full lg:w-1/2">
             <img
-              src="https://tailwindui.com/img/ecommerce-images/home-page-02-hero-half-width.jpg"
-              alt=""
+              src="book-cover-dad.jpg"
+              alt="cover of book depicting theater in nainital"
               className="h-full w-full object-cover object-center"
             />
           </div>

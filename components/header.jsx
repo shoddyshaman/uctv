@@ -11,7 +11,7 @@ function classNames(...classes) {
 export default function Header() {
   const [location, setLocation] = useState(null);
   const { data: session } = useSession();
-  console.log(session);
+  // console.log(session);
   useEffect(() => {
     setLocation(window.location.pathname);
   }, []);
@@ -119,14 +119,14 @@ export default function Header() {
                     Articles
                   </a>
                   <a
-                    href="/goa"
+                    href="https://www.youtube.com/@koon-nikoon"
                     className={`inline-flex items-center border-b-2  px-1 pt-1 text-sm font-medium ${
-                      location === "/goa"
+                      location === "/videos"
                         ? borderActive.current
                         : borderActive.default
                     }`}
                   >
-                    God's Own Art
+                    Youtube
                   </a>
                   <a
                     href="/contact"
