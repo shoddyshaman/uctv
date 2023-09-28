@@ -3,8 +3,8 @@ import client from "../../../lib/prismadb.ts";
 export default async function handler({ query: { id } }, res) {
   const posts = await client.$queryRaw`SELECT * FROM test_data`;
     const filtered = posts.filter((post) => post.post_id === +id)
-    console.log(posts)
-    console.log('filtered:',filtered)
+    // console.log(posts)
+    // console.log('filtered:',filtered)
     if (posts.length > 0) {
       res.status(200).send(filtered[0])
     } else {

@@ -31,7 +31,7 @@ const article = ({ article }) => {
 };
 
 export const getStaticProps = async (context) => {
-  console.log(context);
+//   console.log(context);
   const res = await fetch(`${server}/api/article/${context.params.id}`);
 
   const article = await res.json();
@@ -47,6 +47,7 @@ export const getStaticPaths = async () => {
   const res = await fetch(`${server}/api/article`);
     
   const articles = await res.json();
+// console.log(articles[0])
 
   const ids = articles.map((article) => article.post_id);
     // console.log(ids);
