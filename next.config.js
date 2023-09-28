@@ -2,9 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    images: {
-        allowFutureImage: true,
-    },
+    // images: {
+    //     allowFutureImage: true,
+    // },
 },
   swcMinify: true,
 }
