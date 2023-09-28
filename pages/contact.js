@@ -18,7 +18,7 @@ export default function Contact() {
               <p className="mt-3 text-lg leading-6 text-gray-500">
               Hello there!
               <br />
-We're thrilled that you'd like to get in touch with us. Your feedback, questions, and comments are important to us, and we can't wait to hear from you.
+We&apos;re thrilled that you&apos;d like to get in touch with us. Your feedback, questions, and comments are important to us, and we can&apos;t wait to hear from you.
 
               </p>
               <dl className="mt-8 text-base text-gray-500">

@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-const signin = () => {
+const Signin = () => {
   const { data: session, status } = useSession();
   const [email, setEmail] = useState("");
   if (session) {
@@ -140,4 +140,4 @@ const signin = () => {
   );
 };
 
-export default signin;
+export default Signin;

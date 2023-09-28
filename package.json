@@ -13,6 +13,8 @@
     "@heroicons/react": "^1.0.6",
     "@next-auth/prisma-adapter": "^1.0.5",
     "@prisma/client": "^4.10.1",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
     "clsx": "^1.2.1",
     "next": "^13.5.3",
     "next-auth": "^4.19.2",

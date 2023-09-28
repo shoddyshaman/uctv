@@ -19,16 +19,16 @@ export default function BookPlug() {
                     Theatre in Nainital
                   </h1>
                   <p className="mt-2 text-lg text-gray-600">
-                    A Small Town's Passion for the Performing Arts. Nainital is
+                    A Small Town&apos;s Passion for the Performing Arts. Nainital is
                     a small town in the Indian state of Uttarakhand, nestled in
                     the Himalayan foothills. Despite its size, Nainital has a
                     thriving theatre scene, with several small theatre companies
                     producing plays and musicals throughout the year. This book
-                    tells the story of Nainital's love affair with the
+                    tells the story of Nainital&apos;s love affair with the
                     performing arts, from the early days of street theatre to
                     the present day. It features interviews with theatre
                     directors, actors, and audience members, as well as photos
-                    and behind-the-scenes glimpses of Nainital's theatre scene.
+                    and behind-the-scenes glimpses of Nainital&apos;s theatre scene.
                   </p>
                   <div className="mt-6">
                     <a

@@ -17,8 +17,9 @@ export default function BlogArticles({articles,blogHeading,blogHeadingExcerpt}) 
         </div>
         <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
           {articles.map((post) => (
-            <Link href={`/article/${post.post_id}`}>
-            <div key={post.title} className="flex flex-col rounded-lg shadow-lg overflow-hidden">
+            
+            <Link href={`/article/${post.post_id}`} key={post.title}>
+            <div  className="flex flex-col rounded-lg shadow-lg overflow-hidden">
               <div className="flex-shrink-0">
                 <img className="h-48 w-full object-cover" src={post.imageUrl} alt="" />
               </div>

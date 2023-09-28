@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/solid";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Link from "next/link";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -45,7 +46,7 @@ export default function Header() {
   const renderLoginLink = (active) => {
     if (session) {
       return (
-        <a
+        <Link
           onClick={() =>
             signOut({ callbackUrl: "http://localhost:3000/api/auth/signin" })
           }
@@ -55,11 +56,11 @@ export default function Header() {
           )}
         >
           Sign out
-        </a>
+        </Link>
       );
     } else {
       return (
-        <a
+        <Link
           href="/api/auth/signin"
           className={classNames(
             active ? "bg-gray-100" : "",
@@ -67,7 +68,7 @@ export default function Header() {
           )}
         >
           Sign in
-        </a>
+        </Link>
       );
     }
   };
@@ -98,7 +99,7 @@ export default function Header() {
                 </div>
                 <div className="hidden lg:ml-6 lg:flex lg:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                  <a
+                  <Link
                     href="/"
                     className={`inline-flex items-center border-b-2 ${
                       location === "/"
@@ -107,8 +108,8 @@ export default function Header() {
                     } px-1 pt-1 text-sm font-medium text-gray-900`}
                   >
                     Home
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/articles"
                     className={`inline-flex items-center border-b-2  px-1 pt-1 text-sm font-medium ${
                       location === "/articles"
@@ -117,8 +118,8 @@ export default function Header() {
                     }`}
                   >
                     Articles
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="https://www.youtube.com/@koon-nikoon"
                     className={`inline-flex items-center border-b-2  px-1 pt-1 text-sm font-medium ${
                       location === "/videos"
@@ -127,8 +128,8 @@ export default function Header() {
                     }`}
                   >
                     Youtube
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/contact"
                     className={`inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium ${
                       location === "/contact"
@@ -137,7 +138,7 @@ export default function Header() {
                     }`}
                   >
                     Contact
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
@@ -226,7 +227,7 @@ export default function Header() {
                         <>
                           <Menu.Item>
                             {({ active }) => (
-                              <a
+                              <Link
                                 href="#"
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
@@ -234,12 +235,12 @@ export default function Header() {
                                 )}
                               >
                                 Your Profile
-                              </a>
+                              </Link>
                             )}
                           </Menu.Item>
                           <Menu.Item>
                             {({ active }) => (
-                              <a
+                              <Link
                                 href="#"
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
@@ -247,7 +248,7 @@ export default function Header() {
                                 )}
                               >
                                 Settings
-                              </a>
+                              </Link>
                             )}
                           </Menu.Item>
                         </>
