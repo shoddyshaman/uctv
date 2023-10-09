@@ -34,7 +34,7 @@ export const getStaticProps = async (context) => {
 //   console.log(context);
   const res = await fetch(`${server}/api/article/${context.params.id}`);
 
-  const article = await trim(res.json());
+  const article = await res.json();
 
   return {
     props: {
