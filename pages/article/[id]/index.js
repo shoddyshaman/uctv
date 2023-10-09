@@ -44,6 +44,14 @@ export const getStaticProps = async (context) => {
 };
 
 export const getStaticPaths = async () => {
+
+    if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+        return {
+          paths: [],
+          fallback: 'blocking',
+        }
+      }
+      
   const res = await fetch(`${server}/api/article`);
     
   const articles = await res.json();
@@ -55,7 +63,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
