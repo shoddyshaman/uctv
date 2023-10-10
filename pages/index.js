@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Header from "../components/header";
 import { server } from '../config'
-import { Author } from "../components/author";
+import  Author  from "../components/author";
 import Publications from "../components/publications";
 import BlogArticles from "../components/blogArticles";
 import SignupNewsletter from "../components/signupnewsletter";

@@ -6,7 +6,8 @@ export default async function handler({ query: { id } }, res) {
     // console.log(posts)
     // console.log('filtered:',filtered)
     if (posts.length > 0) {
-      res.status(200).json(filtered[0])
+      // console.log('filtered:',JSON.parse(filtered[0]))
+      res.status(200).json(filtered[0]) 
     } else {
       res
         .status(404)

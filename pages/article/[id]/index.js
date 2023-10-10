@@ -13,13 +13,13 @@ const article = ({ article }) => {
         <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             {article.title}
-          <figure className="mt-16">
-          <img
-            className="aspect-video rounded-xl bg-gray-50 object-cover"
-            src={article.imageUrl}
-            alt=""
-          />
-        </figure>
+            <figure className="mt-16">
+              <img
+                className="aspect-video rounded-xl bg-gray-50 object-cover"
+                src={article.imageUrl}
+                alt=""
+              />
+            </figure>
           </h1>
           <p className="mt-10">{article.content}</p>
           <br />
@@ -31,11 +31,11 @@ const article = ({ article }) => {
 };
 
 export const getStaticProps = async (context) => {
-//   console.log(context);
-  const res = await fetch(`${server}/api/article/${context.params.id}`);
+  //   console.log(context);
+  const response = await fetch(`${server}/api/article/${context.params.id}`);
 
-  const article = await res.json();
-
+  const article = await response.json();
+    console.log(article)    
   return {
     props: {
       article,
@@ -44,21 +44,20 @@ export const getStaticProps = async (context) => {
 };
 
 export const getStaticPaths = async () => {
+  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+    return {
+      paths: [],
+      fallback: "blocking",
+    };
+  }
 
-    if (process.env.SKIP_BUILD_STATIC_GENERATION) {
-        return {
-          paths: [],
-          fallback: 'blocking',
-        }
-      }
-      
   const res = await fetch(`${server}/api/article`);
-    
+
   const articles = await res.json();
-// console.log(articles[0])
+  // console.log(articles[0])
 
   const ids = articles.map((article) => article.post_id);
-    // console.log(ids);
+  // console.log(ids);
   const paths = ids.map((id) => ({ params: { id: id.toString() } }));
 
   return {

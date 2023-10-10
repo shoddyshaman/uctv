@@ -2,7 +2,7 @@ import Image from "next/legacy/image";
 import { GridPattern } from "./utils/GridPattern";
 
 
-export function Author() {
+export default function Author() {
   return (
     <section
       id="author"
