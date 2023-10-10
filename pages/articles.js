@@ -14,8 +14,6 @@ export default function Articles({ articles }) {
 }
 
 export const getStaticProps = async () => {
-  // const res = await fetch(`${server}/api/article`)
-  // console.log(res)
   const articles = await client.$queryRaw`SELECT * FROM test_data`;
 
   return {

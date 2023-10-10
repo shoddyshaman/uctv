@@ -4,9 +4,6 @@ import { useRouter } from "next/router";
 import client from "../../../lib/prismadb";
 
 const article = ({ article }) => {
-  // const router = useRouter()
-  // const { id } = router.query
-
   return (
     <>
       {/* <Meta title={article.title} description={article.excerpt} /> */}
@@ -32,12 +29,11 @@ const article = ({ article }) => {
 };
 
 export const getStaticProps = async (context) => {
-  //   console.log(context);
-//   const response = await fetch(`${server}/api/article/${context.params.id}`);
-const id = +context.params.id
+  const id = +context.params.id;
 
-const response = await client.$queryRaw`SELECT * FROM test_data WHERE post_id = ${id}`
-    console.log(response); 
+  const response =
+    await client.$queryRaw`SELECT * FROM test_data WHERE post_id = ${id}`;
+
   return {
     props: {
       article: response[0],
@@ -53,14 +49,10 @@ export const getStaticPaths = async () => {
     };
   }
 
-//   const res = await fetch(`${server}/api/article`);
-const res = await client.$queryRaw`SELECT * FROM test_data`
-
-//   const articles = await res.json();
-//   console.log(res)
+  const res = await client.$queryRaw`SELECT * FROM test_data`;
 
   const ids = res.map((article) => article.post_id);
-//   console.log(ids);
+
   const paths = ids.map((id) => ({ params: { id: id.toString() } }));
 
   return {

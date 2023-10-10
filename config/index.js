@@ -1,3 +1,3 @@
 const dev = process.env.NODE_ENV !== 'production'
 
-export const server = dev ? 'http://localhost:3000' : 'https://vercel.com/shoddyshaman1/uctv'
+export const server = dev ? 'http://localhost:3000' : 'https://uctv.vercel.app/'
