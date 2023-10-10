@@ -1,6 +1,4 @@
-import { useState } from "react";
-import Header from "../components/header";
-import { server } from '../config'
+import client from "../lib/prismadb";
 import  Author  from "../components/author";
 import Publications from "../components/publications";
 import BlogArticles from "../components/blogArticles";
@@ -24,9 +22,7 @@ export default function Home({ featured }) {
 }
 
 export const getStaticProps = async () => {
-  const res = await fetch(`${server}/api/article`)
-  // console.log(res)
-  const articles = await res.json()
+ const articles = await client.$queryRaw`SELECT * FROM test_data`;
   const featured = articles.filter(article => article.featured === true)
   return {
     props: {
