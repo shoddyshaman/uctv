@@ -15,7 +15,7 @@ export default function Header() {
   // console.log(session);
   useEffect(() => {
     setLocation(window.location.pathname);
-  }, []);
+  });
 
   const renderLoginButton = (active) => {
     if (session) {
