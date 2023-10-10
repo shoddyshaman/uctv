@@ -1,6 +1,7 @@
 import { server } from "../../../config";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import client from "../../../lib/prismadb";
 
 const article = ({ article }) => {
   // const router = useRouter()
@@ -32,13 +33,14 @@ const article = ({ article }) => {
 
 export const getStaticProps = async (context) => {
   //   console.log(context);
-  const response = await fetch(`${server}/api/article/${context.params.id}`);
+//   const response = await fetch(`${server}/api/article/${context.params.id}`);
+const id = +context.params.id
 
-  const article = await response.json();
-    console.log(article)    
+const response = await client.$queryRaw`SELECT * FROM test_data WHERE post_id = ${id}`
+    console.log(response); 
   return {
     props: {
-      article,
+      article: response[0],
     },
   };
 };
@@ -51,13 +53,14 @@ export const getStaticPaths = async () => {
     };
   }
 
-  const res = await fetch(`${server}/api/article`);
+//   const res = await fetch(`${server}/api/article`);
+const res = await client.$queryRaw`SELECT * FROM test_data`
 
-  const articles = await res.json();
-  // console.log(articles[0])
+//   const articles = await res.json();
+//   console.log(res)
 
-  const ids = articles.map((article) => article.post_id);
-  // console.log(ids);
+  const ids = res.map((article) => article.post_id);
+//   console.log(ids);
   const paths = ids.map((id) => ({ params: { id: id.toString() } }));
 
   return {
