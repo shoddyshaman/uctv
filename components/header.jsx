@@ -87,13 +87,13 @@ export default function Header() {
               <div className="flex px-2 lg:px-0">
                 <div className="flex flex-shrink-0 items-center">
                   <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                    className="block h-14 w-auto lg:hidden"
+                    src="/uctv-logo-bg.png"
                     alt="Workflow"
                   />
                   <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                    className="hidden h-14 w-auto lg:block"
+                    src="/uctv-logo-bg.png"
                     alt="Workflow"
                   />
                 </div>
