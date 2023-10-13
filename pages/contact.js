@@ -1,8 +1,26 @@
 import { MailIcon, PhoneIcon } from "@heroicons/react/outline";
-import Header from "../components/header";
-import Footer from "../components/footer";
+import { useState } from "react"; 
 
 export default function Contact() {
+  const [contactData, setContactData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(contactData),
+    });
+    const data = await res.json();
+    res.status === 201 ? alert(data.message) : alert("Something went wrong");
+  }
   return (
     <>
       <div className="relative bg-white">
@@ -62,8 +80,7 @@ We&apos;re thrilled that you&apos;d like to get in touch with us. Your feedback,
           <div className="bg-gray-800 py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
             <div className="mx-auto max-w-lg lg:max-w-none">
               <form
-                action="#"
-                method="POST"
+                onSubmit={handleSubmit}
                 className="grid grid-cols-1 gap-y-6"
               >
                 <div>
@@ -76,7 +93,8 @@ We&apos;re thrilled that you&apos;d like to get in touch with us. Your feedback,
                     id="full-name"
                     autoComplete="name"
                     className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    placeholder="Full name"
+                    placeholder="Full name" 
+                    onChange={(e) => setContactData({...contactData, name: e.target.value})}
                   />
                 </div>
                 <div>
@@ -90,6 +108,7 @@ We&apos;re thrilled that you&apos;d like to get in touch with us. Your feedback,
                     autoComplete="email"
                     className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     placeholder="Email"
+                    onChange={(e) => setContactData({...contactData, email: e.target.value})} 
                   />
                 </div>
                 <div>
@@ -103,6 +122,7 @@ We&apos;re thrilled that you&apos;d like to get in touch with us. Your feedback,
                     autoComplete="tel"
                     className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     placeholder="Phone"
+                    onChange={(e) => setContactData({...contactData, phone: e.target.value})}
                   />
                 </div>
                 <div>
@@ -116,6 +136,7 @@ We&apos;re thrilled that you&apos;d like to get in touch with us. Your feedback,
                     className="block w-full rounded-md border border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     placeholder="Message"
                     defaultValue={""}
+                    onChange={(e) => setContactData({...contactData, message: e.target.value})}
                   />
                 </div>
                 <div>
